@@ -247,3 +247,30 @@ it('prevents demoting a user who is still assigned as a club leader', function (
 
     expect($leader->fresh()->role->value)->toBe(UserRole::Student->value);
 });
+
+it('allows admins to access club registration and apply for a club', function () {
+    $admin = User::factory()->create(['role' => 'admin']);
+    $club = Club::query()->create(['name' => 'CLB dành cho admin test']);
+
+    $this->actingAs($admin)
+        ->get(route('clubs.register'))
+        ->assertOk()
+        ->assertSee('CLB dành cho admin test')
+        ->assertSee('Người đăng ký');
+
+    $this->actingAs($admin)
+        ->post(route('clubs.register.store'), [
+            'club_id' => $club->id,
+            'phone' => '0987654321',
+            'gender' => 'Nam',
+            'cohort' => 'K18',
+        ])
+        ->assertRedirect(route('clubs.index'));
+
+    $this->assertDatabaseHas('club_user', [
+        'club_id' => $club->id,
+        'user_id' => $admin->id,
+        'status' => 'pending',
+    ]);
+});
+

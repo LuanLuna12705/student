@@ -50,7 +50,7 @@ class ClubController extends Controller
     public function create(): View
     {
         $this->authorize('viewAny', Club::class);
-        abort_unless(auth()->user()->isStudent(), 403);
+        abort_unless(auth()->user()->isStudent() || auth()->user()->isAdmin() || auth()->user()->isClubLeader(), 403);
 
         $clubs = Club::query()->orderBy('name')->get();
         $activeApplications = auth()->user()->clubs()
@@ -66,7 +66,7 @@ class ClubController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $this->authorize('viewAny', Club::class);
-        abort_unless(auth()->user()->isStudent(), 403);
+        abort_unless(auth()->user()->isStudent() || auth()->user()->isAdmin() || auth()->user()->isClubLeader(), 403);
 
         $validated = $request->validate([
             'club_id' => ['required', 'exists:clubs,id'],

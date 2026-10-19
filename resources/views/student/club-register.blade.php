@@ -16,8 +16,8 @@
             @csrf
 
             <div>
-                <p class="text-sm font-medium text-gray-700">Sinh viên đăng ký</p>
-                <p class="mt-1 text-sm text-gray-900">{{ Auth::user()->name }} — {{ Auth::user()->email }}</p>
+                <p class="text-sm font-medium text-gray-700">Người đăng ký</p>
+                <p class="mt-1 text-sm text-gray-900">{{ Auth::user()->name }} — {{ Auth::user()->email }} ({{ Auth::user()->role->label() }})</p>
             </div>
 
             <div>

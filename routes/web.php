@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\Student\ClubController as StudentClubController;
 use App\Http\Controllers\Student\EventCalendarController;
 use App\Http\Controllers\Student\ExtracurricularScoreController;
@@ -28,6 +29,10 @@ Route::get('/dashboard', function () {
 
     return view('dashboard', compact('upcomingEvents'));
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/search', [SearchController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('search.index');
 
 Route::get('/announcements', [AnnouncementController::class, 'index'])
     ->middleware(['auth', 'verified'])
