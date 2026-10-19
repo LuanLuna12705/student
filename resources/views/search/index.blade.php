@@ -8,43 +8,36 @@
     <div class="mx-auto max-w-7xl space-y-6 py-6 sm:px-6 lg:px-8"
          x-data="{ activeTab: 'all' }">
 
-        <!-- Khung tìm kiếm chính -->
+        <!-- Tiêu đề kết quả tìm kiếm -->
         <section class="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm sm:p-8">
-            <div class="max-w-3xl">
-                <p class="text-xs font-bold uppercase tracking-wider text-blue-700">PHENIKAA UNIVERSITY · TÌM KIẾM TOÀN DIỆN</p>
-                <h1 class="mt-2 text-2xl font-bold text-gray-900 sm:text-3xl">
-                    @if ($query !== '')
-                        Kết quả cho: <span class="text-blue-700 font-extrabold">“{{ $query }}”</span>
-                    @else
-                        Tìm kiếm trong hệ thống
-                    @endif
-                </h1>
-                <p class="mt-2 text-sm text-gray-600">
-                    Tra cứu nhanh sự kiện, tin tức & thông báo, câu lạc bộ, tài khoản sinh viên và các chức năng trong toàn trường.
-                </p>
-
-                <form method="GET" action="{{ route('search.index') }}" class="mt-6 flex flex-col sm:flex-row gap-3">
-                    <div class="relative flex-1">
-                        <input type="text"
-                               name="q"
-                               value="{{ $query }}"
-                               placeholder="Nhập tên sự kiện, tin tức, câu lạc bộ, sinh viên..."
-                               class="w-full rounded-xl border border-gray-300 bg-gray-50/50 py-3 pl-11 pr-4 text-sm text-gray-900 placeholder:text-gray-400 focus:border-blue-700 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-100 transition shadow-inner">
-                        <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5 text-gray-400">
-                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                            </svg>
-                        </div>
-                    </div>
-                    <button type="submit" class="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-700 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-800">
-                        <span>Tìm kiếm</span>
-                    </button>
-                </form>
+            <div class="flex flex-wrap items-center justify-between gap-4">
+                <div>
+                    <p class="text-xs font-bold uppercase tracking-wider text-blue-700">PHENIKAA UNIVERSITY · KẾT QUẢ TÌM KIẾM</p>
+                    <h1 class="mt-1.5 text-2xl font-bold text-gray-900 sm:text-3xl">
+                        @if ($query !== '')
+                            Kết quả cho: <span class="text-blue-700 font-extrabold">“{{ $query }}”</span>
+                        @else
+                            Tìm kiếm trong hệ thống
+                        @endif
+                    </h1>
+                    <p class="mt-1 text-sm text-gray-500">
+                        @if ($query !== '')
+                            Tìm thấy <span class="font-semibold text-gray-800">{{ $totalCount }}</span> kết quả phù hợp trên toàn trường
+                        @else
+                            Hãy nhập từ khóa vào thanh tìm kiếm ở đầu trang để tra cứu sự kiện, tin tức, câu lạc bộ và các chức năng.
+                        @endif
+                    </p>
+                </div>
+                @if ($query !== '')
+                    <a href="{{ route('dashboard') }}" class="rounded-lg border border-gray-200 px-3.5 py-2 text-xs font-medium text-gray-700 hover:bg-gray-50 transition">
+                        ← Về trang chủ
+                    </a>
+                @endif
             </div>
 
             <!-- Tabs phân loại kết quả -->
             @if ($query !== '')
-                <div class="mt-8 flex flex-wrap gap-2 border-t border-gray-100 pt-5 text-xs sm:text-sm">
+                <div class="mt-6 flex flex-wrap gap-2 border-t border-gray-100 pt-5 text-xs sm:text-sm">
                     <button type="button"
                             @click="activeTab = 'all'"
                             :class="activeTab === 'all' ? 'bg-blue-700 text-white font-semibold shadow-sm' : 'bg-gray-100 text-gray-600 hover:bg-gray-200 font-medium'"
