@@ -42,7 +42,7 @@
 
                 <!-- Tiêu đề chính -->
                 <h1 class="mt-3 text-2xl sm:text-4xl font-extrabold text-gray-900 tracking-tight leading-snug">
-                    Hệ Thống Đăng Ký Sự Kiện &amp; Câu Lạc Bộ
+                    Hệ thống quản lý câu lạc bộ và hoạt động sinh viên
                 </h1>
 
                 <!-- Phụ đề mô tả -->
