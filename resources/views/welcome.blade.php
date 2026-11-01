@@ -107,7 +107,7 @@
 
         <!-- FOOTER DƯỚI CÙNG -->
         <footer class="relative z-10 w-full px-4 py-4 text-center text-xs text-white/80 drop-shadow">
-            <p>&copy; {{ date('Y') }} Trường Đại học Phenikaa · Hệ thống Quản lý Sự kiện &amp; Câu lạc bộ Sinh viên.</p>
+            <p>&copy; {{ date('Y') }}Đại học Phenikaa · Hệ thống Quản lý Sự kiện &amp; Câu lạc bộ Sinh viên.</p>
         </footer>
     </div>
 </body>
