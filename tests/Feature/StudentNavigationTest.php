@@ -451,14 +451,41 @@ it('seeds twenty demo students and events without creating duplicates', function
 });
 
 it('shows the requested news categories', function () {
-    $this->actingAs(User::factory()->create())
+    $this->actingAs(User::factory()->create(['role' => 'admin']))
         ->get(route('announcements.index'))
         ->assertSee('Toàn bộ')
         ->assertSee('Sự kiện câu lạc bộ')
-        ->assertSee('Sự kiện tình nguyện')
+        ->assertSee('Sự kiện nhà trường')
+        ->assertSee('value="campus-event"', false)
         ->assertSee('name="q"', false)
         ->assertSee('name="from"', false)
         ->assertSee('name="to"', false);
+});
+
+it('creates and filters campus event announcements', function () {
+    $admin = User::factory()->create(['role' => 'admin']);
+    $otherAnnouncement = Announcement::query()->create([
+        'title' => 'Thông báo chung',
+        'body' => 'Nội dung tin chung.',
+        'category' => 'general',
+    ]);
+
+    $this->actingAs($admin)
+        ->post(route('announcements.store'), [
+            'title' => 'Ngày hội nhà trường',
+            'body' => 'Thông tin ngày hội.',
+            'category' => 'campus-event',
+        ])
+        ->assertRedirect(route('announcements.index'));
+
+    $this->assertDatabaseHas('announcements', [
+        'title' => 'Ngày hội nhà trường',
+        'category' => 'campus-event',
+    ]);
+
+    $this->get(route('announcements.index', ['category' => 'campus-event']))
+        ->assertSee('Ngày hội nhà trường')
+        ->assertDontSee($otherAnnouncement->title);
 });
 
 it('shows the club submenu and club application selector', function () {

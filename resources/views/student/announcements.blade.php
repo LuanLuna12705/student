@@ -10,7 +10,7 @@
         $categories = [
             'all' => 'Toàn bộ',
             'club-events' => 'Sự kiện câu lạc bộ',
-            'Campus event' => 'Sự kiện nhà trường',
+            'campus-event' => 'Sự kiện nhà trường',
             'general' => 'Tin khác',
         ];
     @endphp
@@ -114,7 +114,7 @@
                     <select id="announcement-category" name="category" required class="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-blue-600 focus:ring-blue-600">
                         <option value="general">Tin khác</option>
                         <option value="club-events">Sự kiện câu lạc bộ</option>
-                        <option value="volunteer-events">Sự kiện tình nguyện</option>
+                        <option value="campus-event">Sự kiện nhà trường</option>
                     </select>
                     @error('category') <p class="mt-1 text-sm text-red-600">{{ $message }}</p> @enderror
                 </div>

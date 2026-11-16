@@ -11,15 +11,13 @@ use Illuminate\View\View;
 
 class AnnouncementController extends Controller
 {
-    public function __construct(private readonly AnnouncementService $announcementService)
-    {
-    }
+    public function __construct(private readonly AnnouncementService $announcementService) {}
 
     public function index(Request $request): View
     {
         $filters = $request->validate([
             'q' => ['nullable', 'string', 'max:255'],
-            'category' => ['nullable', 'in:all,club-events,volunteer-events,general'],
+            'category' => ['nullable', 'in:all,club-events,campus-event,general'],
             'from' => ['nullable', 'date'],
             'to' => ['nullable', 'date', 'after_or_equal:from'],
         ]);
@@ -46,7 +44,7 @@ class AnnouncementController extends Controller
         $validated = $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'body' => ['required', 'string', 'max:10000'],
-            'category' => ['required', 'in:club-events,volunteer-events,general'],
+            'category' => ['required', 'in:club-events,campus-event,general'],
         ]);
 
         $this->announcementService->create($validated);
