@@ -10,7 +10,7 @@
         $categories = [
             'all' => 'Toàn bộ',
             'club-events' => 'Sự kiện câu lạc bộ',
-            'volunteer-events' => 'Sự kiện tình nguyện',
+            'Campus event' => 'Sự kiện nhà trường',
             'general' => 'Tin khác',
         ];
     @endphp

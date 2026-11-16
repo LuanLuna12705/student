@@ -330,7 +330,7 @@
                    class="absolute inset-y-0 left-0 z-40 w-64 flex-shrink-0 min-h-[calc(100vh-53px)] bg-[#1b2a4a] text-gray-300 shadow-lg md:relative md:inset-auto md:z-auto">
                 <nav class="space-y-1 p-3 text-sm font-medium">
 
-                    <a href="{{ route('dashboard') }}" class="flex items-center justify-between rounded-lg bg-blue-800 px-3 py-2.5 font-semibold text-white">
+                    <a href="{{ route('dashboard') }}" class="flex items-center justify-between rounded-lg px-3 py-2.5 font-semibold text-white">
                         <div class="flex items-center space-x-3">
                             <span>🏠</span>
                             <span>Trang chủ</span>
@@ -377,7 +377,6 @@
                             <span>📅</span>
                             <span>Đăng ký Sự kiện</span>
                         </div>
-                        <span class="text-xs">›</span>
                     </a>
 
                     <a href="{{ route('events.calendar') }}" class="flex items-center justify-between px-3 py-2.5 rounded-lg hover:bg-blue-900/50 hover:text-white transition">
@@ -385,7 +384,6 @@
                             <span>🗓️</span>
                             <span>Lịch sự kiện</span>
                         </div>
-                        <span class="text-xs">›</span>
                     </a>
 
                     <div x-data="{ clubsMenuOpen: {{ request()->routeIs('clubs.*') ? 'true' : 'false' }} }">
